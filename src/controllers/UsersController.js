@@ -37,14 +37,14 @@ class UsersController {
     const userWithUpdateEmail = await database.get("SELECT * FROM users WHERE email = (?)", [email])
   
     if(userWithUpdateEmail && userWithUpdateEmail.id !== user.id) {
-      throw new AppError("Este e-mail ja está em uso")
+      throw new AppError("Este e-mail ja está em uso e não é possível utilizá-lo!")
     }
 
     user.name = name ?? user.name
     user.email = email ?? user.email
 
     if(password && !old_password) {
-      throw new AppError("você precisa informal a senha antiga para definir uma nova senha.")
+      throw new AppError("Você precisa informar a senha antiga para definir uma nova senha.")
     }
 
     if(password && old_password) {
