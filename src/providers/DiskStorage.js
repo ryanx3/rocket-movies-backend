@@ -8,7 +8,6 @@ class DiskStorage {
   //Usamos uploadConfig para entrar dentro de TEMP e pegar o file após a virgula
   async saveFile(file) {
     await fs.promises.rename(
-
       path.resolve(uploadConfig.TEMP_FOLDER, file),
       path.resolve(uploadConfig.UPLOADS_FOLDER, file)
     )
