@@ -90,31 +90,34 @@ class NotesController {
 
 
   async update(request, response) {
-    const { title, description, rating, tags } = request.body
-    const { id } = request.params
+    const { title, description, rating, tags } = request.body;
+    const { id } = request.params;
 
-    await knex("movie_notes").where({id}).update({
-      title, 
-      description, 
+    // Excluir todas as tags existentes para a nota
+    await knex("movie_tags").where({ note_id: id }).del();
+
+    // Atualizar a nota (incluindo title, description, rating)
+    await knex("movie_notes").where({ id }).update({
+      title,
+      description,
       rating,
-      updated_at: new Date()
-    })
+      updated_at: new Date(),
+    });
 
-    await knex("movie_tags").where({ note_id: id }).delete();
-
-
-    const newTags = tags.map(name => {
-      return {
+    // Adicionar as novas tags à nota, se houver tags fornecidas
+    if (tags && tags.length > 0) {
+      const newTags = tags.map(name => ({
         note_id: id,
         name,
         user_id: request.user.id,
-      };
-    });
+      }));
 
-    await knex("movie_tags").insert(newTags);
-    
-    return response.json()
+      await knex("movie_tags").insert(newTags);
+    }
 
+    return response.json();
   }
+
 }
+
 module.exports = NotesController 

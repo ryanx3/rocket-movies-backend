@@ -6,7 +6,6 @@ Bem-vindo ao repositório do Rocket Movies Backend! Este projeto, desenvolvido c
 
 ## Aprendizados
 
-O que você aprendeu construindo esse projeto? Quais desafios você enfrentou e como você superou-os?
 
 Desenvolvimento em Node.js e Express:
 
@@ -32,6 +31,7 @@ Persistência de Dados:
 
 Implementei operações CRUD para interagir com um banco de dados, garantindo a integridade das informações.
 Segurança:
+
 ## Stack utilizada
 
 **Front-end:** React, Styled-Components, JavaScript
